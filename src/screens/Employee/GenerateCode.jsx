@@ -17,7 +17,7 @@ const GenerateCode = ({showModal, setShowModal}) => {
       </p>
       <p className="blue__code">2342</p>
       <div className="button__container">
-      <button>
+      <button className="btn btn-brand-primary">
         <BsArrowLeft/>
         <span onClick={()=>setShowModal(!showModal)}>Back to Home</span>
       </button>
@@ -78,15 +78,7 @@ const Modal = styled.section`
       align-items: center;
       padding: 10px 25px;
       gap: 23px;
-      width: 236.33px;
-      font-weight: 500;
-  border-color: transparent;
       font-size: 20px;
-      line-height: 30px;
-      color: #fcfcfc;
-      height: 50px;
-      background: var(--secondaryColor);
-      border-radius: 10px;
     }
     .button__container{
       display: flex;

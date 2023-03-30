@@ -28,7 +28,7 @@ const Index = () => {
             Your code for today is ready, click on the button to send a request
           </p>
         </div>
-        <button onClick={toggleAuth} >
+        <button className="btn btn-brand-primary" onClick={toggleAuth} >
           Generate code
         </button>
       </section>
@@ -107,23 +107,23 @@ const Container = styled.main`
       }
     }
 
-    button {
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
-      padding: 15px 40px;
-      gap: 16px;
-      border-color: transparent;
-      font-weight: 500;
-      font-size: 20px;
-      line-height: 30px;
-      color: #ffffff;
-      width: 230px;
-      height: 68px;
-      background: #1f6df2;
-      border-radius: 10px;
-    }
+    //button {
+    //  display: flex;
+    //  flex-direction: row;
+    //  justify-content: center;
+    //  align-items: center;
+    //  padding: 15px 40px;
+    //  gap: 16px;
+    //  border-color: transparent;
+    //  font-weight: 500;
+    //  font-size: 20px;
+    //  line-height: 30px;
+    //  color: #ffffff;
+    //  width: 230px;
+    //  height: 68px;
+    //  background: #1f6df2;
+    //  border-radius: 10px;
+    //}
   }
 `;
 
