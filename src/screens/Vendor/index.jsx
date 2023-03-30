@@ -7,35 +7,39 @@ import InputCode from "./VerifyCode";
 import { useState } from "react";
 
 const Index = () => {
-    const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
-    const toggleAuth = () => {
-      setShowModal(!showModal);
-    };
+  const toggleAuth = () => {
+    setShowModal(!showModal);
+  };
 
   return (
     <Container>
-        {showModal ? <div className="overlay"></div> : ""}
-        <div className="top__section">
-      <header className="user__badge">
-        <img src={vendor} alt="" />
-        <h1>Savoury Food Services</h1>
-        <p>Caterer/ Food Organizer</p>
-      </header>
-      <section className="prompt">
-        <p className="date">24th Of April, 2023</p>
-        <h2>Ready to Serve?</h2>
-        <p>
-          Every employee has a unique code to access their meal for the day,
-        </p>
-        <p>
-          {" "}
-          <strong>
-            Ensure to verify each code before you proceed to serve.
-          </strong>
-        </p>
+      {showModal ? <div className="overlay"></div> : ""}
+      <div className="top__section">
+        <header className="user__badge">
+          <img src={vendor} alt="" />
+          <h1>Savoury Food Services</h1>
+          <p>Caterer/ Food Organizer</p>
+        </header>
+        <section className="generate__code">
+        <div className="prompt">
+          <p className="date">24th Of April, 2023</p>
+          <h2>Ready to Serve?</h2>
+          <p>
+            Every employee has a unique code to access their meal for the day,
+          </p>
+          <p>
+            <strong>
+              Ensure to verify each code before you proceed to serve.
+            </strong>
+          </p>
+          </div>
+        <button className="btn btn-brand-primary" onClick={toggleAuth} >
+          Generate code
+        </button>
       </section>
-      <div className="input__container">
+        {/* <div className="input__container">
         <form className="box">
           <input
             type="text"
@@ -45,9 +49,9 @@ const Index = () => {
           <CiSearch />
           </button>
         </form>
+      </div> */}
       </div>
-        </div>
-        <Table toggleAuth={toggleAuth} />
+      {/* <Table toggleAuth={toggleAuth} /> */}
         {showModal ? 
       <InputCode toggleAuth={toggleAuth} />
     : "" }
@@ -89,10 +93,10 @@ const Container = styled.main`
           cursor: pointer;
         }
       }
-      button{
+      button {
         width: 40px;
         background: transparent;
-        color:  #111111;
+        color: #111111;
         padding: 0;
         border: none;
       }
@@ -130,33 +134,56 @@ const Container = styled.main`
     height: 100vh;
   }
 
-  section.prompt {
+  section.generate__code {
     background: var(--primaryColor);
     border-radius: 20px;
-    padding: 45px 40px;
+    padding: 45px 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
-    p.date {
-      font-weight: 500;
-      font-size: 20px;
-      line-height: 30px;
-      margin-bottom: 20px;
-      color: var(--secondaryColor);
+    .prompt {
+      p.date {
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 30px;
+        margin-bottom: 20px;
+        color: var(--secondaryColor);
+      }
+
+      h2 {
+        font-weight: 500;
+        font-size: 28px;
+        line-height: 42px;
+        margin-bottom: 12px;
+      }
+      p {
+        font-weight: 400;
+        font-size: 22px;
+        line-height: 167.5%;
+      }
     }
 
-    h2 {
-      font-weight: 500;
-      font-size: 28px;
-      line-height: 42px;
-      margin-bottom: 12px;
-    }
-    p {
-      font-weight: 400;
-      font-size: 22px;
-      line-height: 167.5%;
-    }
+    //button {
+    //  display: flex;
+    //  flex-direction: row;
+    //  justify-content: center;
+    //  align-items: center;
+    //  padding: 15px 40px;
+    //  gap: 16px;
+    //  border-color: transparent;
+    //  font-weight: 500;
+    //  font-size: 20px;
+    //  line-height: 30px;
+    //  color: #ffffff;
+    //  width: 230px;
+    //  height: 68px;
+    //  background: #1f6df2;
+    //  border-radius: 10px;
+    //}
   }
 
-  button {
+  /* button {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -172,7 +199,7 @@ const Container = styled.main`
     height: 68px;
     background: #1f6df2;
     border-radius: 10px;
-  }
+  } */
 `;
 
 export default Index;

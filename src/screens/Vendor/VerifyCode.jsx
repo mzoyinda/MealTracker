@@ -12,7 +12,8 @@ const VerifyCode = ({ toggleAuth }) => {
 
   const handleClick = () => {
     setLoading(true);
-    setStatus("fail");
+    setStatus("verified");
+    console.log(status)
     // after fail set status to default to return form
   };
 
@@ -36,24 +37,38 @@ const VerifyCode = ({ toggleAuth }) => {
           buttonIcon="false"
           toggleAuth={toggleAuth}
         />
+      ) : status === "generated" ? (
+        <Modal>
+          <div className="close__container" onClick={toggleAuth}>
+            <IoMdClose />
+          </div>
+          <h3>Verify Code</h3>
+       
+          <p>Please enter the four-digit unique code for this employee below</p>
+       
+            <input type="text" placeholder="Enter Generated Token" />
+            <div className="button__container">
+              <button>
+                <span onClick={handleClick}>Verify Code</span>
+              </button>
+            </div>
+        </Modal>
       ) : (
         <Modal>
           <div className="close__container" onClick={toggleAuth}>
             <IoMdClose />
           </div>
           <h3>Verify Code</h3>
+       
           <p>Please enter the four-digit unique code for this employee below</p>
 
-          <form>
-            <input type="text" value="Name" disabled />
-            <input type="text" value="Designation" disabled />
-            <input type="text" placeholder="Enter Four-digit code" />
+    
+            <input type="text" placeholder="Enter Employee ID" />
             <div className="button__container">
               <button>
-                <span onClick={handleClick}>Verify Code</span>
+                <span onClick={handleClick}>Generate Code</span>
               </button>
             </div>
-          </form>
         </Modal>
       )}
     </>
@@ -62,7 +77,7 @@ const VerifyCode = ({ toggleAuth }) => {
 
 const Modal = styled.section`
   position: absolute;
-  top: 45%;
+  top: 25%;
   left: 35%;
   z-index: 10;
   width: 680px;

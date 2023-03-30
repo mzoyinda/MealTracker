@@ -38,10 +38,10 @@ const CustomModal = ({
 
 const Modal = styled.section`
   position: absolute;
-  top: 55%;
+  top: 25%;
   left: 35%;
   z-index: 10;
-  width: 500px;
+  width: 600px;
   padding: 24px 51px;
   padding-bottom: 32px;
   background: #ffffff;
