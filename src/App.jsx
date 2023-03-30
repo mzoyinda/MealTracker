@@ -9,6 +9,7 @@ import Vendor from "./screens/Vendor/Index";
 import SetPassword from "./screens/Home/SetPassword";
 // import { PrivateRoute } from './auth/RequireAuth';
 import "./App.css";
+import Manager from "./screens/Admin/Manager";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <Route  path="vendor" element={<Vendor/>}  />
         <Route  path="admin" element={<Admin/>}  >
           <Route element={<AdminHome/>}  index />
+          <Route element={<Manager/>} path="manage-users"  />
         </Route>
 
         {/* protected routes */}
