@@ -1,7 +1,6 @@
 import { Outlet } from "react-router";
 import styled from "styled-components";
 import Navbar from "../../components/Navbar";
-import General from "./General";
 
 
 const Index = () => {
@@ -14,6 +13,7 @@ const Index = () => {
 };
 
 const HomeContainer = styled.main`
+  height: 100vh;
   background:var(--primaryColor);
 `;
 

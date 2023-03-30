@@ -1,0 +1,29 @@
+.btn {
+    @extend .btn;
+    font-weight: bold;
+    height: 65px;
+    line-height: 3;
+    padding-left: 30px;
+    padding-right: 30px;
+    &-brand {
+        &-primary {
+            background-color: $brand-primary;
+            color: $brand-white;
+            &:hover {
+                background-color: $brand-primary;
+                color: $brand-white;
+            }
+        }
+        &-dark {
+            &-outline {
+                background: $white;
+                border: 1px solid $brand-dark;
+                color: $brand-dark;
+                &:hover {
+                    background-color: $brand-primary;
+                    color: $brand-white;
+                }
+            }
+        }
+    }
+}
