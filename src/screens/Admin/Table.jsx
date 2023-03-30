@@ -6,46 +6,45 @@ import Table from "../../components/Table";
 const TableSorting = () => {
   return (
     <Container>
-        <div className="top__section">
-      <div className="input__container">
-        <form className="box">
-          <input
-            type="text"
-            placeholder="search by employee name, designation or date"
-          />
-          <button to="/vendor">
-            <BiCalendar />
-          </button>
-        </form>
-      </div>
-      <div className="sort">
-        <p>Sort by:</p>
-        <select name="status" id="status">
-          <option value="eaten">Eaten</option>
-          <option value="not eaaten">Not Eaten</option>
-        </select>
-      </div>
+      <div className="top__section">
+        <div className="input__container">
+          <form className="box">
+            <input
+              type="text"
+              placeholder="search by employee name, designation or date"
+            />
+            <button to="/vendor">
+              <BiCalendar />
+            </button>
+          </form>
         </div>
-      <Table/>
+        <div className="sort">
+          <p>Sort by:</p>
+          <select name="status" id="status">
+            <option value="eaten">Eaten</option>
+            <option value="not eaaten">Not Eaten</option>
+          </select>
+        </div>
+      </div>
+      <Table />
     </Container>
   );
 };
 
 const Container = styled.section`
-
-.top__section{
+  .top__section {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 30px;
     margin-top: 87px;
     height: 100px;
-  
+
     .input__container {
       display: flex;
       justify-content: center;
       align-items: center;
-  
+
       .box {
         width: 578px;
         border: 2px solid #1f6df2;
@@ -58,17 +57,20 @@ const Container = styled.section`
           border: transparent;
           margin: 5px 0;
           padding: 13px 0;
-          color: #9b9a9a;
-          font-weight: 200;
-          font-size: 18px;
-          line-height: 27px;
+          ::placeholder{
+              color: #9b9a9a;
+              font-weight: 200;
+              font-size: 18px;
+              line-height: 27px;
+
+          }
         }
         svg {
           margin-left: 12px;
           width: 30px;
           height: 30px;
           color: #1f6df2;
-  
+
           :hover {
             cursor: pointer;
           }
@@ -82,7 +84,7 @@ const Container = styled.section`
         }
       }
     }
-  
+
     .sort {
       align-self: baseline;
       p {
@@ -103,7 +105,7 @@ const Container = styled.section`
         border-radius: 10px;
       }
     }
-}
+  }
 `;
 
 export default TableSorting;

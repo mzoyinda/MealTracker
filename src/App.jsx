@@ -1,11 +1,11 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./screens/Home";
+import Home from "./screens/Home/Index";
 import General from "./screens/Home/General";
 import SignIn from "./screens/Home/SignIn";
 import Admin from "./screens/Admin";
 import AdminHome from "./screens/Admin/Home";
-import Employee from "./screens/Employee";
-import Vendor from "./screens/Vendor";
+import Employee from "./screens/Employee/Index";
+import Vendor from "./screens/Vendor/Index";
 import SetPassword from "./screens/Home/SetPassword";
 // import { PrivateRoute } from './auth/RequireAuth';
 import "./App.css";
