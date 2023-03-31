@@ -4,29 +4,83 @@ import { IoMdClose } from "react-icons/io";
 import { BsArrowLeft } from "react-icons/bs";
 import mark from "../../assets/mark.svg";
 import CustomModal from "../../components/Modal";
+import { toast, ToastBar, Toaster } from "react-hot-toast";
+import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
 
 const VerifyCode = ({ toggleAuth }) => {
   const [showModal, setShowModal] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState("default");
+  const [input, setInput] = useState("");
+  const [data, setData] = useState({})
+  const [uniqueCode, setUniqueCode] = useState("")
+
+  const dispatch = useDispatch();
+
+  const user = useSelector((state) => state.user);
+  const { userInfo } = user;
 
   // generate code
-  const generateCode= () => {
+  const generateCode = () => {
     setLoading(true);
-    setStatus("generated");
-    console.log(status)
 
-    // after fail set status to default to return form
+    const value = {
+      employee_identity: input,
+    };
+
+    const headers = {
+      Authorization: `Bearer ${userInfo.access_token}`,
+    };
+    axios
+      .post("https://meal-tracker.onrender.com/caterers/generate-code", value, {
+        headers,
+      })
+      .then((response) => {
+        setLoading(false);
+        setInput("")
+        setStatus("generated");
+        setData(response.data.data)
+        
+        console.log(data, response.data.data)
+      })
+      .catch((error) => {
+        setLoading(false);
+        setStatus("Default");
+        setErrorMsg(error.message);
+      });
+
+    console.log(status);
   };
 
   // handle code verification
-  const verifyCode= () => {
+  const verifyCode = () => {
     setLoading(true);
-    
-    //tokeen time out(toast) -- back to generate code
-    //out
-    setStatus("verified");
-    console.log(status)
+const value = {
+  code:input,
+  employee_id: parseInt(data.employee_id)
+}
+console.log(value)
+
+    const headers = {
+      Authorization: `Bearer ${userInfo.access_token}`,
+    };
+        axios.post(
+          "https://meal-tracker.onrender.com/caterers/verify-meal-code",
+          data,
+          { headers }
+        )
+      .then((response) => {
+        setLoading(false)
+        setStatus("verified");
+      })
+      .catch((error) => {
+        setLoading(false);
+        setStatus("Default");
+        setErrorMsg(error.message);
+      });
+    console.log(status);
     // failure
   };
 
@@ -56,32 +110,48 @@ const VerifyCode = ({ toggleAuth }) => {
             <IoMdClose />
           </div>
           <h3>Verify Token</h3>
-       
-          <p>Please enter the four-digit unique code for this employee below</p>
-       
-            <input type="text" placeholder="Enter Generated Token" />
-            <div className="button__container">
-              <button>
-                <span onClick={verifyCode}>Submit</span>
-              </button>
-            </div>
+
+          <p>Please enter the unique code sent to your mail or phone number</p>
+          <p className="error">{errorMsg}</p>
+          <input
+            type="text"
+            value={input}
+            onChange={(e) => {
+              console.log(e.target.value);
+              setInput(e.target.value);
+            }}
+            placeholder="Enter Generated Token"
+          />
+          <div className="button__container">
+            <button>
+              <span onClick={verifyCode}>{loading ? "Loading..." : "Submit"}</span>
+            </button>
+          </div>
         </Modal>
       ) : (
         <Modal>
           <div className="close__container" onClick={toggleAuth}>
             <IoMdClose />
           </div>
-          <h3>Generate Code</h3>
-       
-          <p>Please enter the four-digit unique code for this employee below</p>
 
-    
-            <input type="text" placeholder="Enter Employee ID" />
-            <div className="button__container">
-              <button>
-                <span onClick={generateCode}>Submit</span>
-              </button>
-            </div>
+          <h3>Generate Code</h3>
+
+          <p>Please enter Employee ID below</p>
+          <p className="error">{errorMsg}</p>
+          <input
+            type="text"
+            value={input}
+            onChange={(e) => {
+              console.log(e.target.value);
+              setInput(e.target.value);
+            }}
+            placeholder="Enter Employee ID"
+          />
+          <div className="button__container">
+            <button>
+              <span onClick={generateCode}>{loading ? "Loading..." : "Submit"}</span>
+            </button>
+          </div>
         </Modal>
       )}
     </>

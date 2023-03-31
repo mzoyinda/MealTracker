@@ -16,7 +16,7 @@ const SignIn = () => {
 
   const user = useSelector((state) => state.user);
   const { loading, error, userInfo } = user;
-  // const redirect = `/${userType}`;
+  const redirect = "/admin";
 
   const checkUserInfo = () => {
     if (userInfo) {
@@ -50,13 +50,12 @@ const SignIn = () => {
     password: Yup.string().required("Password is required"),
   });
 
-  const handleSubmit = async (values) => {
-  dispatch(login(values.email, values.password));
+  const handleSubmit = (values) => {
 
-   setActiveUser(userInfo.user.user_type)
-      // const activeUser = userDetails;
-      console.log(activeUser)
-        navigate(`/${activeUser}`);
+    dispatch(login(values.email, values.password));
+    setActiveUser(userInfo.user.user_type)
+    // const activeUser = userDetails;
+    console.log(activeUser)
   };
 
   return (

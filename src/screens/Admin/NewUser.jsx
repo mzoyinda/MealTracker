@@ -6,7 +6,6 @@ import * as Yup from "yup";
 import { BsArrowLeft } from "react-icons/bs";
 import mark from "../../assets/mark.svg";
 import CustomModal from "../../components/Modal";
-import toast, { ToastBar, Toaster } from "react-hot-toast";
 import axios from "axios";
 import { useSelector } from "react-redux";
 
@@ -16,7 +15,7 @@ const VerifyCode = ({ toggleAuth }) => {
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState("default");
   const [post, setPost] = useState([]);
-  const [error, setError] = useState("");
+  const [error, setErrorMsg] = useState("");
 
   const user = useSelector((state) => state.user);
   const { userInfo } = user;
@@ -45,35 +44,30 @@ const VerifyCode = ({ toggleAuth }) => {
   });
 
   const handleSubmit = (values) => {
+    setLoading(true)
     console.log(values);
-
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': "bearer " + userInfo.access_token,
-      },
-    };
 
     const headers = {
         'Authorization': `Bearer ${userInfo.access_token}`
     }
-    toast
-      .promise(
+
+    let dummy = {
+      "email": "samdave@example.com",
+      "phone_number": "+2349011111111",
+      "name": "Sam",
+      "job_title": "Customer Support"
+    }
         axios
-        .post("https://meal-tracker.onrender.com/auth/create-employee"
-        ,values, {headers}),
-        {
-          loading: "Sending...",
-          success: "Message sent successfully!",
-          error: "An error occured, please try again..",
-        }
-      )
+        .post("https://meal-tracker.onrender.com/auth/create-employee",values,{headers})
       .then((response) => {
+        setLoading(false);
         setPost(response.data);
+        toggleAuth();
         console.log(post);
       })
       .catch((error) => {
-        setError(error);
+        setErrorMsg(error.message);
+        setLoading(false);
       });
   };
 
@@ -97,19 +91,7 @@ const VerifyCode = ({ toggleAuth }) => {
                 Please enter the details below to create a profile for a new
                 employee{" "}
               </p>
-              <Toaster>
-                {(t) => (
-                  <ToastBar
-                    toast={t}
-                    style={{
-                      ...t.style,
-                      animation: t.visible
-                        ? "custom-enter 1s ease"
-                        : "custom-exit 1s ease",
-                    }}
-                  />
-                )}
-              </Toaster>
+              <p className="error">{error}</p>
               <ErrorMessage
                     name="name"
                     component="span"
@@ -166,7 +148,7 @@ const VerifyCode = ({ toggleAuth }) => {
               />
               <div className="button__container">
                 <button type="submit">
-                  <span >Create Profile</span>
+                  <span >{loading ? "Loading..." : "Create Profile"}</span>
                 </button>
               </div>
             </form>
@@ -180,7 +162,7 @@ const VerifyCode = ({ toggleAuth }) => {
 const Modal = styled.section`
   position: absolute;
   top: 18%;
-  left: 35%;
+  left: 25%;
   z-index: 10;
   width: 680px;
   padding: 24px 51px;
