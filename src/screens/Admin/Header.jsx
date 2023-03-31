@@ -1,19 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import { FiUserPlus } from "react-icons/fi";
 import { RiMenu2Fill } from "react-icons/ri";
+import { useNavigate } from "react-router-dom";
+import NewUser from "./NewUser";
 import styled from "styled-components";
 
 const Header = () => {
+    const Navigate = useNavigate();
+    const [showModal, setShowModal] = useState(false);
+
+    const toggleAuth = () => {
+      setShowModal(!showModal);
+    };
+
   return (
     <Container>
+      {showModal ? <div className="overlay"></div> : ""}
     <div className="flexbox">
     <RiMenu2Fill className="menu" />
-      <button>
+      <button onClick={toggleAuth}>
         <FiUserPlus />
         <span>Add New Employee</span>
       </button>
     </div>
-      <div className="cards">
+      <div className="cards" onClick={()=>Navigate("/admin/manage-users")}>
         <div className="card">
           <p>All Employees</p>
           <h2>1000</h2>
@@ -27,11 +37,23 @@ const Header = () => {
           <h2>700</h2>
         </div>
       </div>
+      {showModal ? 
+      <NewUser toggleAuth={toggleAuth} />
+    : "" }
     </Container>
   );
 };
 
 const Container = styled.header`
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #00000090;
+    width: 100vw;
+    z-index: 1;
+    height: 100vh;
+  }
 
 .flexbox{
   display: flex;

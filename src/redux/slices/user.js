@@ -14,7 +14,7 @@ export const userSlice = createSlice({
       state.loading = true;
     },
     userLogin: (state, { payload }) => {
-      state.userInfo = payload;
+      state.userInfo = payload.admin;
       state.error = null;
       state.loading = false;
     },

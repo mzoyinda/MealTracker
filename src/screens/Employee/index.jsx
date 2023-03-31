@@ -1,9 +1,14 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import user from "../../assets/user.png";
+import pic from "../../assets/user.png";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Outlet, useNavigate } from "react-router";
+
 import GenerateCode from "./GenerateCode";
 import VerifyCode from "./VerifyCode";
+import { logout } from "../../redux/actions/userActions";
 
 const Index = () => {
   const [showModal, setShowModal] = useState(false);
@@ -12,24 +17,51 @@ const Index = () => {
     setShowModal(!showModal);
   };
 
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
+  const { loading, error, userInfo } = user;
+  
+    useEffect(() => {
+      if (userInfo) {
+        const activeUser = userInfo.user.user_type;
+        console.log(userInfo, activeUser)
+      if (userInfo) {
+        const activeUser = userInfo.user.user_type;
+        console.log(userInfo, activeUser);
+      }else if (activeUser !== "employee") {
+          navigate("/sign-in");
+        }
+      }
+    },[userInfo, location.state, error, navigate]);
+
+  const logoutHandler = () => {
+    dispatch(logout());
+      };
+
+
   return (
     <Container>
       {showModal ? <div className="overlay"></div> : ""}
       <header className="user__badge">
-        <img src={user} alt="user" />
-        <h1>Olaoluwa Sharon</h1>
+       <div className="box">
+       <img src={pic} alt="user" />
+        <h1>{userInfo.user.name}</h1>
         <p>Customer service support</p>
+       </div>
+        <button className="logout" onClick={logoutHandler}>Logout</button>
+
       </header>
       <section className="generate__code">
         <div className="prompt">
           <p className="date">24th Of April, 2023</p>
           <h2>Ready to eat?</h2>
           <p>
-            Your code for today is ready, click on the button to send a request
+            Here is your meal ticket, to get your food
           </p>
         </div>
-        <button className="btn btn-brand-primary" onClick={toggleAuth} >
-          Generate code
+        <button className="btn btn-brand-primary code__btn" onClick={toggleAuth} >
+          {userInfo.user.identity}
         </button>
       </section>
       {showModal ? 
@@ -48,6 +80,11 @@ const Container = styled.main`
 
   .user__badge {
     margin-bottom: 100px;
+    margin-left: 12px;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
 
     img {
       width: 71px;
@@ -58,11 +95,27 @@ const Container = styled.main`
       font-weight: 500;
       font-size: 28px;
       line-height: 42px;
+      margin-top: 4px;
+      margin-bottom: 0;
     }
     p {
       font-weight: 200;
       font-size: 22px;
       line-height: 33px;
+    }
+    .logout {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      padding: 12px 10px;
+      width: 149px;
+      margin-right: 40px;
+      height: 43px;
+      color: white;
+      background: #1f6df2;
+      border: 2px solid #1f6df2;
+      border-radius: 10px;
     }
   }
 
@@ -107,23 +160,23 @@ const Container = styled.main`
       }
     }
 
-    //button {
-    //  display: flex;
-    //  flex-direction: row;
-    //  justify-content: center;
-    //  align-items: center;
-    //  padding: 15px 40px;
-    //  gap: 16px;
-    //  border-color: transparent;
-    //  font-weight: 500;
-    //  font-size: 20px;
-    //  line-height: 30px;
-    //  color: #ffffff;
-    //  width: 230px;
-    //  height: 68px;
-    //  background: #1f6df2;
-    //  border-radius: 10px;
-    //}
+     button {
+       display: flex;
+       flex-direction: row;
+       justify-content: center;
+       align-items: center;
+       padding: 15px 40px;
+       gap: 16px;
+       border-color: transparent;
+       font-weight: 500;
+       font-size: 20px;
+       line-height: 30px;
+       color: #ffffff;
+       width: 230px;
+       height: 68px;
+       background: #1f6df2;
+       border-radius: 10px;
+     }
   }
 `;
 

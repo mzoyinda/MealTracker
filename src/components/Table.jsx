@@ -7,26 +7,26 @@ const data = [
     Date: "22-22-32",
     Name: "Oyin Dawodu",
     Designation: "Customer service support",
-    "": true,
+    "Status": true,
   },
   {
     "S/N": 2,
     Date: "22-22-32",
     Name: "Olaoluwa Sharon",
     Designation: "Talent",
-    "": false,
+    "Status": false,
   },
   {
     "S/N": 3,
     Date: "22-22-32",
     Name: "Chioma Williams",
     Designation: "Engineering",
-    "": true,
+    "Status": true,
   },
 ];
 
 const Table = ({toggleAuth}) => {
-
+   
   const TableMarkup = ({ titles, data }) => (
     <StyledTable>
       <colgroup>
@@ -50,9 +50,7 @@ const Table = ({toggleAuth}) => {
                 {item[title] === true ? (
                   <p className="eaten">Eaten</p>
                 ) : item[title] === false ? (
-                    <div className="button__container">
-                        <button onClick={toggleAuth }>Verify Code</button>
-                    </div>
+                    <p className="not__eaten">Not Eaten</p>
                 ) : (
                   item[title]
                 )}
@@ -106,6 +104,12 @@ const StyledTable = styled.table`
     }
     :nth-child(4){
     width: 350px; 
+    }
+    .eaten{
+       color: #31c050a7;
+    }
+    .not__eaten{
+        color: #ff0000a4;
     }
   }
   td {

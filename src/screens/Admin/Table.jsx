@@ -18,6 +18,7 @@ const TableSorting = () => {
             </button>
           </form>
         </div>
+
         <div className="sort">
           <p>Sort by:</p>
           <select name="status" id="status">
@@ -44,6 +45,7 @@ const Container = styled.section`
       display: flex;
       justify-content: center;
       align-items: center;
+      align-self: flex-end;
 
       .box {
         width: 578px;
@@ -98,6 +100,8 @@ const Container = styled.section`
         flex-direction: row;
         align-items: center;
         padding: 0px 18px;
+        box-sizing: content-box;
+        
         gap: 39px;
         width: 140px;
         height: 51px;

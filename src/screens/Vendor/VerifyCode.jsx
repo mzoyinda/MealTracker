@@ -10,11 +10,24 @@ const VerifyCode = ({ toggleAuth }) => {
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState("default");
 
-  const handleClick = () => {
+  // generate code
+  const generateCode= () => {
     setLoading(true);
+    setStatus("generated");
+    console.log(status)
+
+    // after fail set status to default to return form
+  };
+
+  // handle code verification
+  const verifyCode= () => {
+    setLoading(true);
+    
+    //tokeen time out(toast) -- back to generate code
+    //out
     setStatus("verified");
     console.log(status)
-    // after fail set status to default to return form
+    // failure
   };
 
   return (
@@ -42,14 +55,14 @@ const VerifyCode = ({ toggleAuth }) => {
           <div className="close__container" onClick={toggleAuth}>
             <IoMdClose />
           </div>
-          <h3>Verify Code</h3>
+          <h3>Verify Token</h3>
        
           <p>Please enter the four-digit unique code for this employee below</p>
        
             <input type="text" placeholder="Enter Generated Token" />
             <div className="button__container">
               <button>
-                <span onClick={handleClick}>Verify Code</span>
+                <span onClick={verifyCode}>Submit</span>
               </button>
             </div>
         </Modal>
@@ -58,7 +71,7 @@ const VerifyCode = ({ toggleAuth }) => {
           <div className="close__container" onClick={toggleAuth}>
             <IoMdClose />
           </div>
-          <h3>Verify Code</h3>
+          <h3>Generate Code</h3>
        
           <p>Please enter the four-digit unique code for this employee below</p>
 
@@ -66,7 +79,7 @@ const VerifyCode = ({ toggleAuth }) => {
             <input type="text" placeholder="Enter Employee ID" />
             <div className="button__container">
               <button>
-                <span onClick={handleClick}>Generate Code</span>
+                <span onClick={generateCode}>Submit</span>
               </button>
             </div>
         </Modal>

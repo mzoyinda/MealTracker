@@ -48,6 +48,7 @@ const Container = styled.nav`
       font-size: 14px;
       line-height: 21px;
       display: flex;
+      margin: 0;
       align-items: center;
       color: #1f6df2;
     }
@@ -55,6 +56,7 @@ const Container = styled.nav`
       font-weight: 400;
       font-size: 12px;
       line-height: 18px;
+      margin: 0;
       color: #333333;
     }
   }

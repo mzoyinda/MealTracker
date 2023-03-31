@@ -29,3 +29,11 @@ a:hover, button:hover{
   cursor: pointer;
 }
 
+.input-error {
+
+  border-color: #e63946;
+}
+.error{
+  color: #e63946;
+}
+
