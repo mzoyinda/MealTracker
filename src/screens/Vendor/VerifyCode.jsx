@@ -47,7 +47,7 @@ const VerifyCode = ({ toggleAuth }) => {
       .catch((error) => {
         setLoading(false);
         setStatus("Default");
-        setErrorMsg(error.message);
+        setErrorMsg("This user has already eaten today");
       });
 
     console.log(status);
@@ -77,7 +77,7 @@ console.log(value)
       .catch((error) => {
         setLoading(false);
         setStatus("Default");
-        setErrorMsg(error.message);
+        setErrorMsg("error.message");
       });
     console.log(status);
     // failure
@@ -104,7 +104,7 @@ console.log(value)
           toggleAuth={toggleAuth}
         />
       ) : status === "generated" ? (
-        <Modal>
+        <Modal onKeyDown={()=>setErrorMsg("")}>
           <div className="close__container" onClick={toggleAuth}>
             <IoMdClose />
           </div>
@@ -128,7 +128,7 @@ console.log(value)
           </div>
         </Modal>
       ) : (
-        <Modal>
+        <Modal onKeyDown={()=>setErrorMsg("")}>
           <div className="close__container" onClick={toggleAuth}>
             <IoMdClose />
           </div>

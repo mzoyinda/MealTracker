@@ -20,14 +20,12 @@ const VerifyCode = ({ toggleAuth }) => {
   const user = useSelector((state) => state.user);
   const { userInfo } = user;
 
-
   const handleClick = () => {
-    setLoading(true);
-    setStatus("verified");
-    console.log(status);
-    // after fail set status to default to return form
-  };
-
+      setLoading(true);
+      setStatus("verified");
+      console.log(status);
+      // after fail set status to default to return form
+    };
 
   const initialValues = {
     name: "",
@@ -84,7 +82,7 @@ const VerifyCode = ({ toggleAuth }) => {
         {(formik) => {
           const { errors, touched } = formik;
           return (
-            <form onSubmit={formik.handleSubmit}>
+            <form onSubmit={formik.handleSubmit} onKeyDown={()=>setErrorMsg("")}>
               <h3>Add new Employee</h3>
 
               <p>

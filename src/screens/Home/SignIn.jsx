@@ -57,7 +57,8 @@ const SignIn = () => {
       navigate(`/${activeUser}`);
       console.log(activeUser)
     }else{
-      navigate("/admin")
+    
+      navigate("/sign-in")
     }
   };
 

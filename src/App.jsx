@@ -3,7 +3,6 @@ import Home from "./screens/Home";
 import General from "./screens/Home/General";
 import SignIn from "./screens/Home/SignIn";
 import Admin from "./screens/Admin";
-import Test from "./screens/Admin/Test";
 import AdminHome from "./screens/Admin/Home";
 import Employee from "./screens/Employee";
 import Vendor from "./screens/Vendor";

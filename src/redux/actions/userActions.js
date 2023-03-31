@@ -12,7 +12,8 @@ export const login = (email, password) => async (dispatch) => {
 
     const { data } = await axios.post('https://meal-tracker.onrender.com/auth/login', { email, password }, config);
     dispatch(userLogin(data));
-    return localStorage.setItem('userInfo', JSON.stringify(data));
+    localStorage.setItem('userInfo', JSON.stringify(data));
+    window.location.reload(false);
 
   } catch (error) {
     dispatch(
