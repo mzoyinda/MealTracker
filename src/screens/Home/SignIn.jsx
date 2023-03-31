@@ -16,16 +16,16 @@ const SignIn = () => {
 
   const user = useSelector((state) => state.user);
   const { loading, error, userInfo } = user;
-  const redirect = "/admin";
+  // const redirect = "/admin";
 
   const checkUserInfo = () => {
     if (userInfo) {
       const activeUser = userInfo.user.user_type;
       console.log(userInfo, activeUser);
 
-      // if (location.state?.from) {
-      //  navigate(location.state.from);
-      // }
+      if (location.state?.from) {
+       navigate(location.state.from);
+      }
       if (activeUser === "admin") {
         navigate("/admin");
       } else if (activeUser === "caterer") {
@@ -51,11 +51,14 @@ const SignIn = () => {
   });
 
   const handleSubmit = (values) => {
-
     dispatch(login(values.email, values.password));
-    setActiveUser(userInfo.user.user_type)
-    // const activeUser = userDetails;
-    console.log(activeUser)
+    if(userInfo){
+      setActiveUser(userInfo.user.user_type)
+      navigate(`/${activeUser}`);
+      console.log(activeUser)
+    }else{
+      navigate("/admin")
+    }
   };
 
   return (

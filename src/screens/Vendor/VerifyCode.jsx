@@ -4,7 +4,6 @@ import { IoMdClose } from "react-icons/io";
 import { BsArrowLeft } from "react-icons/bs";
 import mark from "../../assets/mark.svg";
 import CustomModal from "../../components/Modal";
-import { toast, ToastBar, Toaster } from "react-hot-toast";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 
